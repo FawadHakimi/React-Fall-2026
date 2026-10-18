@@ -1,16 +1,47 @@
-# React + Vite
+# Car Rental
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React single page application for browsing and renting cars.
 
-Currently, two official plugins are available:
+Live app: https://fawadhakimi.github.io/React-Fall-2026/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What it does
 
-## React Compiler
+- Browse 120 cars in a paginated list (12 per page) and open any car for a detail view.
+- Search by brand or model, filter by type, transmission and availability, sort four ways, and reset everything with one button.
+- Add a new car with a controlled, validated form. New cars are saved and show up first in the list.
+- Every data request shows loading, error (with a "Try again" button), empty and success states.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Data source
 
-## Expanding the ESLint configuration
+A simulated API in `src/api/carsApi.js`. It uses Promises, a 300 ms delay, JSON data and `localStorage`. The first request copies the 120 cars from `src/data/cars.js` into `localStorage`, and later requests (and added cars) read from there. Search, filtering, sorting and pagination happen inside the API, so the app asks it for new data whenever a choice changes.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+To test the error state, set `FAIL_RATE` in `carsApi.js` to `0.5`. To restore the original 120 cars, clear the site's `localStorage` and reload.
+
+## Components
+
+- `App`: header and which screen is open (list, detail or form)
+- `CarsPage`: holds filters, page and request status, and loads the list
+- `Filters`: search, selects and checkbox (controlled inputs)
+- `CarList` and `CarCard`: the grid and a single car
+- `Pagination`: previous and next buttons
+- `CarDetail`: loads and shows one car
+- `AddCarForm`: controlled form with validation (includes a small `Field` helper)
+
+## React notes
+
+- State lives in the component that needs it. `App` only knows which screen is open.
+- Effects reload data when their dependencies change (`filters`, `page`, `retryCount`, `carId`).
+- Every request uses an `AbortController`, so outdated responses never overwrite newer data.
+- List items use `car.id` as the key. `CarDetail` uses `key={carId}`, so opening another car resets its state.
+- The list is hidden, not removed, while a car is open, so search, filters and page are kept when going back.
+
+## Run locally
+
+```
+npm install
+npm run dev
+```
+
+## Deploy (GitHub Pages)
+
+Push to `main`. In the repository, go to Settings, Pages, and set Source to GitHub Actions. The workflow in `.github/workflows/deploy.yml` builds the `Midterm` folder and publishes it.
