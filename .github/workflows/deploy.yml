@@ -17,21 +17,41 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Midterm
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: Midterm/package-lock.json
-      - run: npm ci
-      - run: npm run build
+          cache-dependency-path: |
+            Midterm/package-lock.json
+            Task4/package-lock.json
+
+      # Midterm (stays at https://fawadhakimi.github.io/React-Fall-2026/)
+      - name: Build Midterm
+        working-directory: Midterm
+        run: |
+          npm ci
+          npm run build
+
+      # Task 4 (goes to https://fawadhakimi.github.io/React-Fall-2026/Task4/)
+      - name: Build Task4
+        working-directory: Task4
+        run: |
+          npm ci
+          npm run build
+
+      # Put both apps into one folder called "site"
+      - name: Assemble site
+        run: |
+          mkdir -p site/Task4
+          cp -r Midterm/dist/. site/
+          cp -r Task4/dist/. site/Task4/
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: Midterm/dist
+          path: site
 
   deploy:
     needs: build
