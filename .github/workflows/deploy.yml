@@ -27,6 +27,7 @@ jobs:
           cache-dependency-path: |
             Midterm/package-lock.json
             Task4/package-lock.json
+            Task5/package-lock.json
 
       # Midterm (stays at https://fawadhakimi.github.io/React-Fall-2026/)
       - name: Build Midterm
@@ -42,12 +43,20 @@ jobs:
           npm ci
           npm run build
 
-      # Put both apps into one folder called "site"
+      # Task 5 (goes to https://fawadhakimi.github.io/React-Fall-2026/Task5/)
+      - name: Build Task5
+        working-directory: Task5
+        run: |
+          npm ci
+          npm run build
+
+      # Put all apps into one folder called "site"
       - name: Assemble site
         run: |
-          mkdir -p site/Task4
+          mkdir -p site/Task4 site/Task5
           cp -r Midterm/dist/. site/
           cp -r Task4/dist/. site/Task4/
+          cp -r Task5/dist/. site/Task5/
 
       - uses: actions/upload-pages-artifact@v3
         with:
