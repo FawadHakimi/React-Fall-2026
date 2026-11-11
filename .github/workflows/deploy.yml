@@ -28,6 +28,7 @@ jobs:
             Midterm/package-lock.json
             Task4/package-lock.json
             Task5/package-lock.json
+            Task6/package-lock.json
 
       # Midterm (stays at https://fawadhakimi.github.io/React-Fall-2026/)
       - name: Build Midterm
@@ -50,13 +51,28 @@ jobs:
           npm ci
           npm run build
 
+      # Task 6 (goes to https://fawadhakimi.github.io/React-Fall-2026/Task6/)
+      - name: Build Task6
+        working-directory: Task6
+        env:
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+        run: |
+          npm ci
+          npm run build
+
       # Put all apps into one folder called "site"
       - name: Assemble site
         run: |
-          mkdir -p site/Task4 site/Task5
+          mkdir -p site/Task4 site/Task5 site/Task6
           cp -r Midterm/dist/. site/
           cp -r Task4/dist/. site/Task4/
           cp -r Task5/dist/. site/Task5/
+          cp -r Task6/dist/. site/Task6/
 
       - uses: actions/upload-pages-artifact@v3
         with:
