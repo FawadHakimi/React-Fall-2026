@@ -7,3 +7,4 @@ Assignments and projects for the React course.
 | [Midterm](Midterm) | Car Rental: React single page application | [Open](https://fawadhakimi.github.io/React-Fall-2026/) |
 | [Task4](Task4) | Car Fleet Manager: Async React with Effects and a fake API | [Open](https://fawadhakimi.github.io/React-Fall-2026/Task4/) |
 | [Task5](Task5) | Car Rental: Routing & Application Architecture with React Router | [Open](https://fawadhakimi.github.io/React-Fall-2026/Task5/) |
+| [Task6](Task6) | Car Rental: Server Data, Caching (TanStack Query) & Firebase Authentication | [Open](https://fawadhakimi.github.io/React-Fall-2026/Task6/) |
