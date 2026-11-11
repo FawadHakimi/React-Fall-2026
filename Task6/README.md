@@ -100,4 +100,4 @@ npm run dev
 
 On Windows, instead of `cp`, copy the file manually and rename it to `.env.local`.
 
-`VITE_` values are put into the build by Vite, so run `npm run build` on a computer that has `.env.local` before deploying.
+The app is deployed by GitHub Actions (`.github/workflows/deploy.yml`). The six `VITE_FIREBASE_*` values are stored as GitHub repository secrets and passed to the Task6 build step, because `.env.local` is not committed.
