@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#106090" />
+    <title>Offline - Car Rental</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: #f7f7f8;
+        color: #16181d;
+        line-height: 1.5;
+      }
+      .card {
+        width: 100%;
+        max-width: 420px;
+        padding: 32px 24px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+      }
+      .icon { font-size: 48px; margin: 0; }
+      h1 { margin: 8px 0; font-size: 24px; }
+      p { margin: 0 0 20px; color: #6b7280; }
+      button {
+        min-height: 44px;
+        padding: 0 24px;
+        font: inherit;
+        font-weight: 500;
+        color: #fff;
+        background: #106090;
+        border: 0;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .failed { margin: 16px 0 0; font-size: 14px; color: #b42318; }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <p class="icon" aria-hidden="true">📡</p>
+      <h1>You are offline</h1>
+      <p>We cannot reach the internet and this page was not saved on your device yet. Check your connection and try again.</p>
+      <button type="button" id="retry">Retry Connection</button>
+      <p class="failed" id="failed" hidden>Still offline. Please try again.</p>
+    </main>
+    <script>
+      // Try to load the app again. If the network works, go to the app.
+      document.getElementById("retry").addEventListener("click", function () {
+        fetch("./ping.txt?ping=" + Date.now(), { cache: "no-store" })
+          .then(function (res) {
+            if (res.ok) location.href = "./";
+            else throw new Error("offline");
+          })
+          .catch(function () {
+            document.getElementById("failed").hidden = false;
+          });
+      });
+    </script>
+  </body>
+</html>
