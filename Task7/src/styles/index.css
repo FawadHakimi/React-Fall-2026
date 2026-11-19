@@ -283,78 +283,6 @@ body {
 .menu-bar { display: block; height: 2px; background: var(--text); border-radius: 1px; }
 .menu-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* ---------- Phones and small tablets ---------- */
-@media (max-width: 720px) {
-  .container { padding-top: 20px; padding-bottom: 32px; }
-
-  .site-header-inner {
-    display: flex;
-    justify-content: space-between;
-    height: auto;
-    flex-wrap: wrap;
-    row-gap: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  .menu-toggle { display: flex; }
-  .header-controls { order: 2; margin-left: auto; }
-  .nav {
-    order: 3;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    flex-basis: 100%;
-    margin: 10px 0 0;
-    padding-top: 6px;
-    border-top: 1px solid var(--border);
-  }
-  .nav.is-open { display: flex; }
-  .nav-link,
-  .nav-button {
-    display: flex;
-    align-items: center;
-    min-height: 48px;
-    padding: 0 4px;
-    font-size: 16px;
-    text-align: left;
-  }
-
-  /* Touch-friendly controls. 16px text stops iPhones from zooming into inputs. */
-  .btn { height: 44px; }
-  .field { height: 44px; font-size: 16px; }
-  .field.textarea { height: auto; }
-  .check-label { height: 44px; }
-  .check-label input { width: 20px; height: 20px; }
-
-  .detail-card { padding: 20px; }
-  .detail-header h2 { font-size: 24px; }
-  .dash-grid .detail-card { padding: 20px; }
-  .filters { padding: 16px; }
-
-  .form-actions .btn { flex: 1; }
-  .pagination { gap: 8px; }
-  .pagination .btn { padding: 0 14px; }
-}
-
-@media (max-width: 480px) {
-  .container { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
-  .site-header-inner { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
-  .hero { padding: 20px; }
-  .hero-text h1 { font-size: 24px; }
-  .hero-actions .btn { flex: 1; justify-content: center; }
-  .bar-row { grid-template-columns: 72px 1fr 64px; gap: 8px; font-size: 13px; }
-  .about-page { flex-direction: column; gap: 2px; }
-  .page-head h2, .section-head h2, .form-title { font-size: 22px; }
-  .stat-value { font-size: 28px; }
-}
-
-/* Phone turned sideways: the screen is very short, so the header scrolls away. */
-@media (max-height: 500px) {
-  .site-header { position: static; }
-}
-
-
 /* ---------- Detail links ---------- */
 .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
 
@@ -675,4 +603,75 @@ a.bar-row:hover .bar-label { color: var(--accent); }
 /* Touch screens wider than a phone (tablets): bigger tap targets in the header */
 @media (pointer: coarse) {
   .nav-link { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+/* ---------- Phones and small tablets ---------- */
+@media (max-width: 720px) {
+  .container { padding-top: 20px; padding-bottom: 32px; }
+
+  .site-header-inner {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    flex-wrap: wrap;
+    row-gap: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .menu-toggle { display: flex; }
+  .header-controls { order: 2; margin-left: auto; }
+  .nav {
+    order: 3;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    flex-basis: 100%;
+    margin: 10px 0 0;
+    padding-top: 6px;
+    border-top: 1px solid var(--border);
+  }
+  .nav.is-open { display: flex; }
+  .nav-link,
+  .nav-button {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 4px;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  /* Touch-friendly controls. 16px text stops iPhones from zooming into inputs. */
+  .btn { height: 44px; }
+  .field { height: 44px; font-size: 16px; }
+  .field.textarea { height: auto; }
+  .check-label { height: 44px; }
+  .check-label input { width: 20px; height: 20px; }
+
+  .detail-card { padding: 20px; }
+  .detail-header h2 { font-size: 24px; }
+  .dash-grid .detail-card { padding: 20px; }
+  .filters { padding: 16px; }
+
+  .form-actions .btn { flex: 1; }
+  .pagination { gap: 8px; }
+  .pagination .btn { padding: 0 14px; }
+}
+
+@media (max-width: 480px) {
+  .container { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+  .site-header-inner { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+  .hero { padding: 20px; }
+  .hero-text h1 { font-size: 24px; }
+  .hero-actions .btn { flex: 1; justify-content: center; }
+  .bar-row { grid-template-columns: 72px 1fr 64px; gap: 8px; font-size: 13px; }
+  .about-page { flex-direction: column; gap: 2px; }
+  .page-head h2, .section-head h2, .form-title { font-size: 22px; }
+  .stat-value { font-size: 28px; }
+}
+
+/* Phone turned sideways: the screen is very short, so the header scrolls away. */
+@media (max-height: 500px) {
+  .site-header { position: static; }
 }
